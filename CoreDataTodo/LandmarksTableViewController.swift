@@ -19,6 +19,9 @@ class LandmarksTableViewController: UITableViewController {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
         navigationItem.searchController = searchController
+        
+        landmarks = fetchLandmark()
+        tableView.reloadData()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -27,11 +30,6 @@ class LandmarksTableViewController: UITableViewController {
     }
 
     // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
     
     var container : NSPersistentContainer{
         return(UIApplication.shared.delegate as! AppDelegate).persistentContainer
@@ -98,9 +96,13 @@ class LandmarksTableViewController: UITableViewController {
         alertController.addAction(saveAction)
         present(alertController,animated: true)
     }
+
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return landmarks.count
     }
+    
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         let landmark = landmarks[indexPath.row]
@@ -109,7 +111,6 @@ class LandmarksTableViewController: UITableViewController {
         cell.detailTextLabel?.text = DateFormatter.localizedString(from: landmark.creationDate!,
                                                                    dateStyle: .short,
                                                                    timeStyle: .short)
-        
         
         return cell
         
