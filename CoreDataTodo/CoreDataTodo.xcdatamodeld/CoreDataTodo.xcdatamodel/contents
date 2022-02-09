@@ -1,13 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19574" systemVersion="21A559" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Entity" representedClassName="Entity" syncable="YES" codeGenerationType="class"/>
+    <entity name="Category" representedClassName="Category" syncable="YES" codeGenerationType="class">
+        <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="modificationDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="landmark" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Landmark" inverseName="category" inverseEntity="Landmark"/>
+    </entity>
+    <entity name="Coordinate" representedClassName="Coordinate" syncable="YES" codeGenerationType="class">
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="landmark" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Landmark" inverseName="coordinate" inverseEntity="Landmark"/>
+    </entity>
     <entity name="Item" representedClassName="Item" syncable="YES">
         <attribute name="date" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="isChecked" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="title" attributeType="String"/>
     </entity>
+    <entity name="Landmark" representedClassName="Landmark" syncable="YES" codeGenerationType="class">
+        <attribute name="creationDate" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="desc" attributeType="String"/>
+        <attribute name="image" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
+        <attribute name="isFavorite" attributeType="Boolean" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="modificationDate" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="title" attributeType="String"/>
+        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="landmark" inverseEntity="Category"/>
+        <relationship name="coordinate" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Coordinate" inverseName="landmark" inverseEntity="Coordinate"/>
+    </entity>
     <elements>
+        <element name="Landmark" positionX="-54" positionY="18" width="128" height="149"/>
         <element name="Item" positionX="-63" positionY="-18" width="128" height="74"/>
-        <element name="Entity" positionX="-54" positionY="18" width="128" height="29"/>
+        <element name="Coordinate" positionX="-18" positionY="81" width="128" height="74"/>
+        <element name="Category" positionX="9" positionY="90" width="128" height="89"/>
     </elements>
 </model>
