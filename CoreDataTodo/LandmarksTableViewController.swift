@@ -70,7 +70,7 @@ class LandmarksTableViewController: UITableViewController {
         saveContext()
     }
     
-    @IBAction func AddBarButtonItemAction(_ sender: UIBarButtonItem) {
+    /*@IBAction func AddBarButtonItemAction(_ sender: UIBarButtonItem) {
     
         let alertController = UIAlertController(title: "nouveau lieu", message: "ajouter nouveau lieu", preferredStyle: .alert)
         alertController.addTextField { textField in
@@ -95,7 +95,7 @@ class LandmarksTableViewController: UITableViewController {
         alertController.addAction(cancelAction)
         alertController.addAction(saveAction)
         present(alertController,animated: true)
-    }
+    }*/
 
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -143,8 +143,17 @@ class LandmarksTableViewController: UITableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "CategoryToLandmark" , let destinationViewController = segue.destination as? LandmarksTableViewController{
-            destinationViewController.text = "Landmarks"
+        if segue.identifier == "addItem" {
+            let navVC = segue.destination as! UINavigationController
+            let destVC = navVC.topViewController as! AddEditLandmarkViewController
+            //destVC.delegate = self
+        }
+        if segue.identifier == "editItem" {
+            let navVC = segue.destination as! UINavigationController
+            let destVC = navVC.topViewController as! AddEditLandmarkViewController
+            //destVC.delegate = self
+            let indexEditing = sender as! UITableViewCell
+            destVC.landmarkToEdit = landmarks[tableView.indexPath(for: indexEditing)!.row]
         }
     }
     
@@ -159,60 +168,26 @@ extension LandmarksTableViewController : UISearchResultsUpdating{
     }
 }
 
-
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
+extension AddEditLandmarkViewController : AddEditLandmarkViewControllerDelegate {
+    func AddEditLandmarkViewControllerDidCancel(_ controller: AddEditLandmarkViewController) {
+        self.dismiss(animated: true)
     }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    
+    func AddEditLandmarkViewController(_ controller: AddEditLandmarkViewController, didFinishAddingItem item: Landmark) {
+        /*list.append(item)
+        let indexPath = IndexPath(row: list.count - 1, section: 0)
+        tableView.insertRows(at: [indexPath], with: .automatic)
+        self.dismiss(animated: true)
+        saveChecklistItems()*/
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+    
+    func AddEditLandmarkViewController(_ controller: AddEditLandmarkViewController, didFinishEditingItem item: Landmark) {
+        /*let index = list.firstIndex() { $0 === item }
+        
+        let indexPath = IndexPath(row: index!, section: 0)
+        
+        tableView.reloadRows(at: [indexPath], with: .automatic)
+        self.dismiss(animated: true)
+        saveChecklistItems()*/
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-
+}
