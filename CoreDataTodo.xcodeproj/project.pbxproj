@@ -16,6 +16,7 @@
 		08BD4D6F27B3AB8700B1F401 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08BD4D6D27B3AB8700B1F401 /* LaunchScreen.storyboard */; };
 		08BD4D7827B3B28B00B1F401 /* Item+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BD4D7627B3B28B00B1F401 /* Item+CoreDataClass.swift */; };
 		08BD4D7927B3B28B00B1F401 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BD4D7727B3B28B00B1F401 /* Item+CoreDataProperties.swift */; };
+		08BD4D7B27B3F36F00B1F401 /* LandmarksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BD4D7A27B3F36F00B1F401 /* LandmarksTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		08BD4D7027B3AB8700B1F401 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		08BD4D7627B3B28B00B1F401 /* Item+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		08BD4D7727B3B28B00B1F401 /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		08BD4D7A27B3F36F00B1F401 /* LandmarksTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarksTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 				08BD4D5F27B3AB8600B1F401 /* AppDelegate.swift */,
 				08BD4D6127B3AB8600B1F401 /* SceneDelegate.swift */,
 				08BD4D6327B3AB8600B1F401 /* TodoListTableViewController.swift */,
+				08BD4D7A27B3F36F00B1F401 /* LandmarksTableViewController.swift */,
 				08BD4D6527B3AB8600B1F401 /* Main.storyboard */,
 				08BD4D6B27B3AB8700B1F401 /* Assets.xcassets */,
 				08BD4D6D27B3AB8700B1F401 /* LaunchScreen.storyboard */,
@@ -148,6 +151,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				08BD4D7927B3B28B00B1F401 /* Item+CoreDataProperties.swift in Sources */,
+				08BD4D7B27B3F36F00B1F401 /* LandmarksTableViewController.swift in Sources */,
 				08BD4D7827B3B28B00B1F401 /* Item+CoreDataClass.swift in Sources */,
 				08BD4D6427B3AB8600B1F401 /* TodoListTableViewController.swift in Sources */,
 				08BD4D6027B3AB8600B1F401 /* AppDelegate.swift in Sources */,

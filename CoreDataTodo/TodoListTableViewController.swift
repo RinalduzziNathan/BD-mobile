@@ -10,6 +10,7 @@ import CoreData
 
 class TodoListTableViewController: UITableViewController {
     var items : [Item] = []
+    var categories : [Category] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -18,7 +19,7 @@ class TodoListTableViewController: UITableViewController {
         searchController.searchResultsUpdater = self
         navigationItem.searchController = searchController
         
-        items = fetchItems()
+        categories = fetchCategory()
         // Do any additional setup after loading the view.
     }
 
@@ -29,13 +30,13 @@ class TodoListTableViewController: UITableViewController {
     private func saveContext(){
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
     }
-    private func fetchItems(searchQuery: String? = nil) -> [Item]{
-        let fetchRequest = Item.fetchRequest()
+    private func fetchCategory(searchQuery: String? = nil) -> [Category]{
+        let fetchRequest = Category.fetchRequest()
         
-        let sortDescriptor = NSSortDescriptor(keyPath : \Item.title, ascending: true)
+        let sortDescriptor = NSSortDescriptor(keyPath : \Category.name, ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
         if let searchQuery = searchQuery, !searchQuery.isEmpty {
-            let predicate = NSPredicate(format : "%K contains[cd] %@", argumentArray: [#keyPath(Item.title),searchQuery])
+            let predicate = NSPredicate(format : "%K contains[cd] %@", argumentArray: [#keyPath(Category.name),searchQuery])
             fetchRequest.predicate = predicate
         }
         
@@ -47,21 +48,22 @@ class TodoListTableViewController: UITableViewController {
             fatalError(error.localizedDescription)
         }
     }
-    private func createItem(title: String, date: Date = Date()){
-        let item = Item(context: container.viewContext)
-        item.title = title
-        item.date = date
+    private func createCategory(name: String, date: Date = Date()){
+        let category = Category(context: container.viewContext)
+        category.name = name
+        category.creationDate = date
+        category.modificationDate = date
         saveContext()
     }
 
-    private func delete(item : Item){
-        container.viewContext.delete(item)
+    private func delete(category : Category){
+        container.viewContext.delete(category)
         saveContext()
     }
     
     @IBAction func AddBarButtonItemAction(_ sender: UIBarButtonItem) {
     
-        let alertController = UIAlertController(title: "nouvelle tahe", message: "ajouter tâche liste", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "nouvelle catégorie", message: "ajouter nouvelle catégorie", preferredStyle: .alert)
         alertController.addTextField { textField in
             textField.placeholder = "Nom…"
         }
@@ -76,8 +78,8 @@ class TodoListTableViewController: UITableViewController {
             guard let self = self, let textField = alertController.textFields?.first else{
                 return
             }
-            self.createItem(title: textField.text!)
-            self.items = self.fetchItems()
+            self.createCategory(name: textField.text!)
+            self.categories = self.fetchCategory()
             self.tableView.reloadData()
         }
         
@@ -86,14 +88,16 @@ class TodoListTableViewController: UITableViewController {
         present(alertController,animated: true)
     }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items.count
+        return categories.count
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        let item = items[indexPath.row]
-        cell.accessoryType = item.isChecked ? .checkmark : .none
-        cell.textLabel?.text = item.title
-        cell.detailTextLabel?.text = DateFormatter.localizedString(from: item.date!,                                                       dateStyle: .short,                                                       timeStyle: .short)
+        let category = categories[indexPath.row]
+       // cell.accessoryType = item.isChecked ? .checkmark : .none
+        cell.textLabel?.text = category.name
+        cell.detailTextLabel?.text = DateFormatter.localizedString(from: category.creationDate!,
+                                                                   dateStyle: .short,
+                                                                   timeStyle: .short)
         
         
         return cell
@@ -101,15 +105,15 @@ class TodoListTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let item = items[indexPath.row]
+        let category = categories[indexPath.row]
         let deleteAction = UIContextualAction(style: .destructive, title: "Supprimer"){ [weak self] _, _,completion in
             guard let self = self else {
                 return
             }
         
-            self.delete(item: item)
+            self.delete(category: category)
             //self.items = self.fetchItems()
-            self.items.remove(at: indexPath.row)
+            self.categories.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
         let swipeActionConfiguration = UISwipeActionsConfiguration(actions: [deleteAction])
@@ -117,13 +121,19 @@ class TodoListTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let item  = items[indexPath.row]
-        item.isChecked.toggle()
+        let category  = categories[indexPath.row]
+       // category.isChecked.toggle()
         saveContext()
         guard let cell = tableView.cellForRow(at: indexPath) else {
             return
         }
-        cell.accessoryType = item.isChecked ? .checkmark : .none
+       // cell.accessoryType = category.isChecked ? .checkmark : .none
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "CategoryToLandmark" , let destinationViewController = segue.destination as? LandmarksTableViewController{
+            destinationViewController.text = "Landmarks"
+        }
     }
     
 }
@@ -132,7 +142,7 @@ extension TodoListTableViewController : UISearchResultsUpdating{
      
     func updateSearchResults(for seatchController : UISearchController){
         let searchQuery = seatchController.searchBar.text
-        items = fetchItems(searchQuery: searchQuery)
+        categories = fetchCategory(searchQuery: searchQuery)
         tableView.reloadData()
     }
 }
