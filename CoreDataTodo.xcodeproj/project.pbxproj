@@ -156,7 +156,6 @@
 				08BD4D7927B3B28B00B1F401 /* Item+CoreDataProperties.swift in Sources */,
 				08BD4D7B27B3F36F00B1F401 /* LandmarksTableViewController.swift in Sources */,
 				08BD4D7827B3B28B00B1F401 /* Item+CoreDataClass.swift in Sources */,
-				08BD4D7D27B4078300B1F401 /* EditCategoryTableViewController.swift in Sources */,
 				08BD4D6427B3AB8600B1F401 /* TodoListTableViewController.swift in Sources */,
 				08BD4D6027B3AB8600B1F401 /* AppDelegate.swift in Sources */,
 				08BD4D6A27B3AB8600B1F401 /* CoreDataTodo.xcdatamodeld in Sources */,
