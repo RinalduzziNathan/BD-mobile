@@ -22,7 +22,7 @@ class TodoListTableViewController: UITableViewController {
         categories = fetchCategory()
         // Do any additional setup after loading the view.
     }
-
+    
     var container : NSPersistentContainer{
         return(UIApplication.shared.delegate as! AppDelegate).persistentContainer
     }
@@ -55,14 +55,46 @@ class TodoListTableViewController: UITableViewController {
         category.modificationDate = date
         saveContext()
     }
-
+    private func editCategory(name: String, category : Category){
+        category.name = name
+        category.modificationDate = Date()
+        saveContext()
+    }
+    
     private func delete(category : Category){
         container.viewContext.delete(category)
         saveContext()
     }
     
-    @IBAction func AddBarButtonItemAction(_ sender: UIBarButtonItem) {
+    override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+        let alertController = UIAlertController(title: "Editer catégorie", message: "Editer la catégorie", preferredStyle: .alert)
+        alertController.addTextField { textField in
+            textField.placeholder = "Nouveau nom…"
+        }
+        
+        let cancelAction = UIAlertAction(title : "Annuler",
+                                         style: .cancel,
+                                         handler: nil)
+        
+        let saveAction = UIAlertAction(title : "Sauvegarder",
+                                       style: .default){[weak self] _ in
+            
+            guard let self = self, let textField = alertController.textFields?.first else{
+                return
+            }
+
+            let category = self.categories[indexPath.row]
+            self.editCategory(name: textField.text!, category:category)
+            self.categories = self.fetchCategory()
+            self.tableView.reloadData()
+        }
+        alertController.addAction(cancelAction)
+        alertController.addAction(saveAction)
+        present(alertController,animated: true)
+    }
     
+    @IBAction func AddBarButtonItemAction(_ sender: UIBarButtonItem) {
+        
         let alertController = UIAlertController(title: "nouvelle catégorie", message: "ajouter nouvelle catégorie", preferredStyle: .alert)
         alertController.addTextField { textField in
             textField.placeholder = "Nom…"
@@ -73,8 +105,8 @@ class TodoListTableViewController: UITableViewController {
                                          handler: nil)
         
         let saveAction = UIAlertAction(title : "Sauvegarder",
-                                   style: .default){[weak self] _ in
-        
+                                       style: .default){[weak self] _ in
+            
             guard let self = self, let textField = alertController.textFields?.first else{
                 return
             }
@@ -93,7 +125,7 @@ class TodoListTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         let category = categories[indexPath.row]
-       // cell.accessoryType = item.isChecked ? .checkmark : .none
+        // cell.accessoryType = item.isChecked ? .checkmark : .none
         cell.textLabel?.text = category.name
         cell.detailTextLabel?.text = DateFormatter.localizedString(from: category.creationDate!,
                                                                    dateStyle: .short,
@@ -110,7 +142,7 @@ class TodoListTableViewController: UITableViewController {
             guard let self = self else {
                 return
             }
-        
+            
             self.delete(category: category)
             //self.items = self.fetchItems()
             self.categories.remove(at: indexPath.row)
@@ -122,24 +154,36 @@ class TodoListTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let category  = categories[indexPath.row]
-       // category.isChecked.toggle()
+        // category.isChecked.toggle()
         saveContext()
         guard let cell = tableView.cellForRow(at: indexPath) else {
             return
         }
-       // cell.accessoryType = category.isChecked ? .checkmark : .none
+        // cell.accessoryType = category.isChecked ? .checkmark : .none
     }
+    
+    //override func tab
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "CategoryToLandmark" , let destinationViewController = segue.destination as? LandmarksTableViewController{
             destinationViewController.text = "Landmarks"
+            return
         }
+        if segue.identifier == "CategoryEdit",
+           let navigationController = segue.destination as? UINavigationController,
+           let destinationViewController = navigationController.topViewController as? EditCategoryTableViewController {
+            
+            destinationViewController.text = "Edit"
+            
+        }
+        
+        
     }
     
 }
 
 extension TodoListTableViewController : UISearchResultsUpdating{
-     
+    
     func updateSearchResults(for seatchController : UISearchController){
         let searchQuery = seatchController.searchBar.text
         categories = fetchCategory(searchQuery: searchQuery)
