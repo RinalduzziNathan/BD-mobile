@@ -7,8 +7,10 @@
 
 import UIKit
 import CoreData
+import PhotosUI
 
 class AddEditLandmarkViewController: UIViewController {
+    
     @IBOutlet weak var textFieldTitle: UITextField!
     @IBOutlet weak var textFieldDesc: UITextView!
     
@@ -22,6 +24,7 @@ class AddEditLandmarkViewController: UIViewController {
     
     var category : Category?
     var landmarkToEdit : Landmark?
+    var imageLandmark : Data?
     var delegate : AddEditLandmarkViewControllerDelegate?
     
     override func viewDidLoad() {
@@ -33,6 +36,9 @@ class AddEditLandmarkViewController: UIViewController {
             self.title = "Edit Landmark"
             textFieldTitle.text = landmarkToEdit.title
             textFieldDesc.text = landmarkToEdit.desc
+            if landmarkToEdit.image != nil {
+                imageView.image = UIImage(data: landmarkToEdit.image!)
+            }
         }
         else {
             self.title = "Add Landmark"
@@ -43,6 +49,7 @@ class AddEditLandmarkViewController: UIViewController {
         if let landmarkToEdit = landmarkToEdit {
             landmarkToEdit.title = textFieldTitle.text
             landmarkToEdit.desc = textFieldDesc.text
+            landmarkToEdit.image = imageLandmark
             
             delegate?.AddEditLandmarkViewController(self, didFinishEditingItem: landmarkToEdit)
         }
@@ -53,6 +60,7 @@ class AddEditLandmarkViewController: UIViewController {
             landmark.modificationDate = Date()
             landmark.desc = textFieldDesc.text
             landmark.category = category
+            landmark.image = imageLandmark
             
             delegate?.AddEditLandmarkViewController(self, didFinishAddingItem: landmark)
         }
@@ -63,7 +71,10 @@ class AddEditLandmarkViewController: UIViewController {
     }
     
     @IBAction func chooseImage(_ sender: UIButton) {
-        
+        let configuration = PHPickerConfiguration(photoLibrary: .shared())
+        let picker = PHPickerViewController(configuration: configuration)
+        picker.delegate = self
+        present(picker, animated: true)
     }
 }
 
@@ -71,5 +82,34 @@ protocol AddEditLandmarkViewControllerDelegate : AnyObject {
     func AddEditLandmarkViewControllerDidCancel(_ controller: AddEditLandmarkViewController)
     func AddEditLandmarkViewController(_ controller: AddEditLandmarkViewController, didFinishAddingItem item: Landmark)
     func AddEditLandmarkViewController(_  controller: AddEditLandmarkViewController, didFinishEditingItem item: Landmark)
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any])
+}
+
+extension AddEditLandmarkViewController : PHPickerViewControllerDelegate {
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        //Verif qu'on a bien 1 élément, et qu'on peut le charger en image
+        guard let selectedResult = results.first, selectedResult.itemProvider.canLoadObject(ofClass: UIImage.self) else {
+            return
+        }
+        picker.dismiss(animated: true)
+        //Charge l'image et gestion erreur
+        selectedResult.itemProvider.loadObject(ofClass: UIImage.self) { [weak self] image, error in
+            guard let self = self else {
+                return
+            }
+            if let error = error {
+                //handle error
+                print(error)
+                return
+            }
+            //Cast result en image
+            guard let image = image as? UIImage else {
+                return
+            }
+            //Gestion du thread sur main
+            DispatchQueue.main.async {
+                self.imageLandmark = image.pngData() ?? image.jpegData(compressionQuality: 0.9)
+                self.imageView.image = image
+            }
+        }
+    }
 }
