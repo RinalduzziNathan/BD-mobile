@@ -170,8 +170,10 @@ class LandmarksTableViewController: UITableViewController {
         guard let cell = tableView.cellForRow(at: indexPath) else {
             return
         }
-       // cell.accessoryType = category.isChecked ? .checkmark : .none
+     
     }
+    
+
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "add" {

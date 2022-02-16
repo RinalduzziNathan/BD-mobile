@@ -71,5 +71,4 @@ protocol AddEditLandmarkViewControllerDelegate : AnyObject {
     func AddEditLandmarkViewControllerDidCancel(_ controller: AddEditLandmarkViewController)
     func AddEditLandmarkViewController(_ controller: AddEditLandmarkViewController, didFinishAddingItem item: Landmark)
     func AddEditLandmarkViewController(_  controller: AddEditLandmarkViewController, didFinishEditingItem item: Landmark)
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any])
 }
