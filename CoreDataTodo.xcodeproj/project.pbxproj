@@ -17,7 +17,6 @@
 		08BD4D7827B3B28B00B1F401 /* Item+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BD4D7627B3B28B00B1F401 /* Item+CoreDataClass.swift */; };
 		08BD4D7927B3B28B00B1F401 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BD4D7727B3B28B00B1F401 /* Item+CoreDataProperties.swift */; };
 		08BD4D7B27B3F36F00B1F401 /* LandmarksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BD4D7A27B3F36F00B1F401 /* LandmarksTableViewController.swift */; };
-		08BD4D7D27B4078300B1F401 /* EditCategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BD4D7C27B4078300B1F401 /* EditCategoryTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,7 +32,6 @@
 		08BD4D7627B3B28B00B1F401 /* Item+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		08BD4D7727B3B28B00B1F401 /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		08BD4D7A27B3F36F00B1F401 /* LandmarksTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarksTableViewController.swift; sourceTree = "<group>"; };
-		08BD4D7C27B4078300B1F401 /* EditCategoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCategoryTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,7 +75,6 @@
 				08BD4D6D27B3AB8700B1F401 /* LaunchScreen.storyboard */,
 				08BD4D7027B3AB8700B1F401 /* Info.plist */,
 				08BD4D6827B3AB8600B1F401 /* CoreDataTodo.xcdatamodeld */,
-				08BD4D7C27B4078300B1F401 /* EditCategoryTableViewController.swift */,
 			);
 			path = CoreDataTodo;
 			sourceTree = "<group>";
@@ -156,7 +153,6 @@
 				08BD4D7927B3B28B00B1F401 /* Item+CoreDataProperties.swift in Sources */,
 				08BD4D7B27B3F36F00B1F401 /* LandmarksTableViewController.swift in Sources */,
 				08BD4D7827B3B28B00B1F401 /* Item+CoreDataClass.swift in Sources */,
-				08BD4D7D27B4078300B1F401 /* EditCategoryTableViewController.swift in Sources */,
 				08BD4D6427B3AB8600B1F401 /* TodoListTableViewController.swift in Sources */,
 				08BD4D6027B3AB8600B1F401 /* AppDelegate.swift in Sources */,
 				08BD4D6A27B3AB8600B1F401 /* CoreDataTodo.xcdatamodeld in Sources */,
