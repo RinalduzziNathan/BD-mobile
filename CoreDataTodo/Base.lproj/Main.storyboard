@@ -88,6 +88,9 @@
                                 <rect key="frame" x="277" y="378" width="117" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Choose Image"/>
+                                <connections>
+                                    <action selector="chooseImage:" destination="0FR-qu-Me4" eventType="touchUpInside" id="8dZ-v8-4le"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="tDj-7T-jOt"/>
@@ -134,6 +137,7 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="imageView" destination="2a6-o6-LCR" id="Hhu-oF-q1g"/>
                         <outlet property="textFieldDesc" destination="eeR-pX-E8f" id="lx2-1R-yXa"/>
                         <outlet property="textFieldTitle" destination="Aoc-YI-4xi" id="ZTE-Nr-vez"/>
                     </connections>
