@@ -18,9 +18,9 @@ class LandmarksTableViewController: UITableViewController {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
         navigationItem.searchController = searchController
-        if((category) != nil){
-            landmarks = fetchLandmarksOfCategory(category: category!)
-        }
+
+        landmarks = fetchLandmarksOfCategory(category: category!)
+        
        
         tableView.reloadData()
         // Uncomment the following line to preserve selection between presentations
@@ -62,8 +62,18 @@ class LandmarksTableViewController: UITableViewController {
         let sortDescriptor = NSSortDescriptor(keyPath : \Landmark.title, ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
         if let searchQuery = searchQuery, !searchQuery.isEmpty {
-            let predicate = NSPredicate(format : "%K contains[cd] %@", argumentArray: [#keyPath(Landmark.title),searchQuery])
-            fetchRequest.predicate = predicate
+            let predicates = NSCompoundPredicate(
+                type: .and,
+                subpredicates: [
+                    NSPredicate(format : "%K contains[cd] %@", argumentArray: [#keyPath(Landmark.title),searchQuery]),
+                    NSPredicate(format : "%K == %@" ,argumentArray: [#keyPath(Landmark.category), category])
+                ]
+            )
+     
+            fetchRequest.predicate = predicates
+        }else{
+            let predicates =  NSPredicate(format : "%K == %@" ,argumentArray: [#keyPath(Landmark.category), category])
+            fetchRequest.predicate = predicates
         }
         
         
@@ -80,6 +90,7 @@ class LandmarksTableViewController: UITableViewController {
         landmark.creationDate = date
         landmark.modificationDate = date
         landmark.desc = description
+        landmark.category = category
         saveContext()
     }
 
