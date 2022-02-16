@@ -17,6 +17,7 @@
 		08BD4D7827B3B28B00B1F401 /* Item+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BD4D7627B3B28B00B1F401 /* Item+CoreDataClass.swift */; };
 		08BD4D7927B3B28B00B1F401 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BD4D7727B3B28B00B1F401 /* Item+CoreDataProperties.swift */; };
 		08BD4D7B27B3F36F00B1F401 /* LandmarksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BD4D7A27B3F36F00B1F401 /* LandmarksTableViewController.swift */; };
+		08BEBF8E27BD509E00FDABA8 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BEBF8D27BD509E00FDABA8 /* DetailViewController.swift */; };
 		08EC1DB527B41FE900F25AD1 /* AddEditLandmarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EC1DB427B41FE900F25AD1 /* AddEditLandmarkViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -33,6 +34,7 @@
 		08BD4D7627B3B28B00B1F401 /* Item+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		08BD4D7727B3B28B00B1F401 /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		08BD4D7A27B3F36F00B1F401 /* LandmarksTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarksTableViewController.swift; sourceTree = "<group>"; };
+		08BEBF8D27BD509E00FDABA8 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		08EC1DB427B41FE900F25AD1 /* AddEditLandmarkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditLandmarkViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -78,6 +80,7 @@
 				08BD4D7027B3AB8700B1F401 /* Info.plist */,
 				08BD4D6827B3AB8600B1F401 /* CoreDataTodo.xcdatamodeld */,
 				08EC1DB427B41FE900F25AD1 /* AddEditLandmarkViewController.swift */,
+				08BEBF8D27BD509E00FDABA8 /* DetailViewController.swift */,
 			);
 			path = CoreDataTodo;
 			sourceTree = "<group>";
@@ -153,6 +156,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08BEBF8E27BD509E00FDABA8 /* DetailViewController.swift in Sources */,
 				08BD4D7927B3B28B00B1F401 /* Item+CoreDataProperties.swift in Sources */,
 				08BD4D7B27B3F36F00B1F401 /* LandmarksTableViewController.swift in Sources */,
 				08BD4D7827B3B28B00B1F401 /* Item+CoreDataClass.swift in Sources */,

@@ -189,6 +189,11 @@ class LandmarksTableViewController: UITableViewController {
             let indexEditing = sender as! UITableViewCell
             destVC.landmarkToEdit = landmarks[tableView.indexPath(for: indexEditing)!.row]
         }
+        if segue.identifier == "detail" , let destinationViewController = segue.destination as? DetailViewController{
+            let indexEditing = sender as! UITableViewCell
+            destinationViewController.category = self.category
+            destinationViewController.landmark = landmarks[tableView.indexPath(for: indexEditing)!.row]
+        }
     }
     
 }

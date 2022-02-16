@@ -34,7 +34,7 @@
                             <outlet property="delegate" destination="cGd-MR-hWk" id="AtJ-1m-18g"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Category" id="St3-mh-h9O">
+                    <navigationItem key="navigationItem" title="Category" largeTitleDisplayMode="always" id="St3-mh-h9O">
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="UY5-ZM-fov">
                             <connections>
                                 <action selector="AddBarButtonItemAction:" destination="cGd-MR-hWk" id="0Mu-Bx-Kpw"/>
@@ -173,6 +173,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <segue destination="dox-4w-8wr" kind="presentation" identifier="edit" trigger="accessoryAction" id="RBK-IE-Qek"/>
+                                    <segue destination="Uru-pu-2Zf" kind="show" identifier="detail" id="cJt-8h-xqa"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -195,6 +196,40 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ydy-vM-7AA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2900" y="102"/>
+        </scene>
+        <!--Detail View Controller-->
+        <scene sceneID="sxU-mK-jgS">
+            <objects>
+                <viewController id="Uru-pu-2Zf" customClass="DetailViewController" customModule="CoreDataTodo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="MfW-jw-coS">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="c8h-WX-hwm" customClass="Detail">
+                                <rect key="frame" x="86" y="222" width="242" height="452"/>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nX9-bE-Zan">
+                                <rect key="frame" x="186" y="193" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="G3L-R9-Ry3"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="c8h-WX-hwm" firstAttribute="centerY" secondItem="MfW-jw-coS" secondAttribute="centerY" id="440-Hs-i0d"/>
+                            <constraint firstItem="c8h-WX-hwm" firstAttribute="leading" secondItem="G3L-R9-Ry3" secondAttribute="leading" constant="86" id="OQS-9A-psU"/>
+                            <constraint firstItem="c8h-WX-hwm" firstAttribute="top" secondItem="G3L-R9-Ry3" secondAttribute="top" constant="134" id="hQ3-KH-9Z5"/>
+                            <constraint firstItem="c8h-WX-hwm" firstAttribute="centerX" secondItem="MfW-jw-coS" secondAttribute="centerX" id="oBL-nQ-POA"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="uK0-tL-jwl"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dE6-sX-mzi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4114.4927536231889" y="101.78571428571428"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="sW2-GC-J6h">
