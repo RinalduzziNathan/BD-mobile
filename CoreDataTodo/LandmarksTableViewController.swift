@@ -15,6 +15,7 @@ class LandmarksTableViewController: UITableViewController {
     override func viewDidLoad() {
         print(category?.name)
         super.viewDidLoad()
+        title = category?.name
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
         navigationItem.searchController = searchController
