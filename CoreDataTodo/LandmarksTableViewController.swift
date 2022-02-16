@@ -18,8 +18,10 @@ class LandmarksTableViewController: UITableViewController {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
         navigationItem.searchController = searchController
-        
-        landmarks = fetchLandmark()
+        if((category) != nil){
+            landmarks = fetchLandmarksOfCategory(category: category!)
+        }
+       
         tableView.reloadData()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -32,6 +34,23 @@ class LandmarksTableViewController: UITableViewController {
     
     var container : NSPersistentContainer{
         return(UIApplication.shared.delegate as! AppDelegate).persistentContainer
+    }
+    
+    private func fetchLandmarksOfCategory(category : Category) -> [Landmark]{
+        let fetchRequest = Landmark.fetchRequest()
+
+      //  let sortDescriptor = NSSortDescriptor(keyPath : \Landmark.category, ascending: true)
+        let sortDescriptor = NSSortDescriptor(keyPath : \Landmark.creationDate, ascending: true)
+        
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        fetchRequest.predicate = NSPredicate(format : "%K == %@" ,argumentArray: [#keyPath(Landmark.category), category])
+    
+        do{
+            let result = try container.viewContext.fetch(fetchRequest)
+            return result
+        }catch{
+            fatalError(error.localizedDescription)
+        }
     }
     
     private func saveContext(){
@@ -64,6 +83,7 @@ class LandmarksTableViewController: UITableViewController {
         saveContext()
     }
 
+    
     private func delete(landmark : Landmark){
         container.viewContext.delete(landmark)
         saveContext()
