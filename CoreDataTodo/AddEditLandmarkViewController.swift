@@ -50,8 +50,6 @@ class AddEditLandmarkViewController: UIViewController {
             landmark.desc = textFieldDesc.text
             landmark.category = category
             
-            print(category)
-            print(category?.name)
             delegate?.AddEditLandmarkViewController(self, didFinishAddingItem: landmark)
         }
     }
