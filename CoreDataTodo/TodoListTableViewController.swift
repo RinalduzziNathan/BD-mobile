@@ -13,34 +13,34 @@ class TodoListTableViewController: UITableViewController {
     var categories : [Category] = []
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+
+
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
         navigationItem.searchController = searchController
-        
+
         categories = fetchCategory()
         // Do any additional setup after loading the view.
     }
-    
+
     var container : NSPersistentContainer{
         return(UIApplication.shared.delegate as! AppDelegate).persistentContainer
     }
-    
+
     private func saveContext(){
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
     }
     private func fetchCategory(searchQuery: String? = nil) -> [Category]{
         let fetchRequest = Category.fetchRequest()
-        
+
         let sortDescriptor = NSSortDescriptor(keyPath : \Category.name, ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
         if let searchQuery = searchQuery, !searchQuery.isEmpty {
             let predicate = NSPredicate(format : "%K contains[cd] %@", argumentArray: [#keyPath(Category.name),searchQuery])
             fetchRequest.predicate = predicate
         }
-        
-        
+
+
         do{
             let result = try container.viewContext.fetch(fetchRequest)
             return result
@@ -60,25 +60,25 @@ class TodoListTableViewController: UITableViewController {
         category.modificationDate = Date()
         saveContext()
     }
-    
+
     private func delete(category : Category){
         container.viewContext.delete(category)
         saveContext()
     }
-    
+
     override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
         let alertController = UIAlertController(title: "Editer catégorie", message: "Editer la catégorie", preferredStyle: .alert)
         alertController.addTextField { textField in
             textField.placeholder = "Nouveau nom…"
         }
-        
+
         let cancelAction = UIAlertAction(title : "Annuler",
                                          style: .cancel,
                                          handler: nil)
-        
+
         let saveAction = UIAlertAction(title : "Sauvegarder",
                                        style: .default){[weak self] _ in
-            
+
             guard let self = self, let textField = alertController.textFields?.first else{
                 return
             }
@@ -92,21 +92,21 @@ class TodoListTableViewController: UITableViewController {
         alertController.addAction(saveAction)
         present(alertController,animated: true)
     }
-    
+
     @IBAction func AddBarButtonItemAction(_ sender: UIBarButtonItem) {
-        
+
         let alertController = UIAlertController(title: "nouvelle catégorie", message: "ajouter nouvelle catégorie", preferredStyle: .alert)
         alertController.addTextField { textField in
             textField.placeholder = "Nom…"
         }
-        
+
         let cancelAction = UIAlertAction(title : "Annuler",
                                          style: .cancel,
                                          handler: nil)
-        
+
         let saveAction = UIAlertAction(title : "Sauvegarder",
                                        style: .default){[weak self] _ in
-            
+
             guard let self = self, let textField = alertController.textFields?.first else{
                 return
             }
@@ -114,7 +114,7 @@ class TodoListTableViewController: UITableViewController {
             self.categories = self.fetchCategory()
             self.tableView.reloadData()
         }
-        
+
         alertController.addAction(cancelAction)
         alertController.addAction(saveAction)
         present(alertController,animated: true)
@@ -130,19 +130,19 @@ class TodoListTableViewController: UITableViewController {
         cell.detailTextLabel?.text = DateFormatter.localizedString(from: category.creationDate!,
                                                                    dateStyle: .short,
                                                                    timeStyle: .short)
-        
-        
+
+
         return cell
-        
+
     }
-    
+
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let category = categories[indexPath.row]
         let deleteAction = UIContextualAction(style: .destructive, title: "Supprimer"){ [weak self] _, _,completion in
             guard let self = self else {
                 return
             }
-            
+
             self.delete(category: category)
             //self.items = self.fetchItems()
             self.categories.remove(at: indexPath.row)
@@ -151,7 +151,7 @@ class TodoListTableViewController: UITableViewController {
         let swipeActionConfiguration = UISwipeActionsConfiguration(actions: [deleteAction])
         return swipeActionConfiguration
     }
-    
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let category  = categories[indexPath.row]
         // category.isChecked.toggle()
@@ -161,22 +161,19 @@ class TodoListTableViewController: UITableViewController {
         }
         // cell.accessoryType = category.isChecked ? .checkmark : .none
     }
-    
+
     //override func tab
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "CategoryToLandmark" , let destinationViewController = segue.destination as? LandmarksTableViewController{
             destinationViewController.text = "Landmarks"
             return
         }
-       
-        
     }
-    
 }
 
 extension TodoListTableViewController : UISearchResultsUpdating{
-    
+
     func updateSearchResults(for seatchController : UISearchController){
         let searchQuery = seatchController.searchBar.text
         categories = fetchCategory(searchQuery: searchQuery)
