@@ -9,12 +9,12 @@ import UIKit
 import CoreData
 
 class LandmarksTableViewController: UITableViewController {
+    var category : Category?
     var landmarks : [Landmark] = []
-    var text: String?
     
     override func viewDidLoad() {
+        print(category?.name)
         super.viewDidLoad()
-        
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
         navigationItem.searchController = searchController
@@ -142,15 +142,16 @@ class LandmarksTableViewController: UITableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "addItem" {
+        if segue.identifier == "add" {
             let navVC = segue.destination as! UINavigationController
             let destVC = navVC.topViewController as! AddEditLandmarkViewController
-            //destVC.delegate = self
+            destVC.delegate = self
+            destVC.category = category
         }
-        if segue.identifier == "editItem" {
+        if segue.identifier == "edit" {
             let navVC = segue.destination as! UINavigationController
             let destVC = navVC.topViewController as! AddEditLandmarkViewController
-            //destVC.delegate = self
+            destVC.delegate = self
             let indexEditing = sender as! UITableViewCell
             destVC.landmarkToEdit = landmarks[tableView.indexPath(for: indexEditing)!.row]
         }
@@ -167,26 +168,26 @@ extension LandmarksTableViewController : UISearchResultsUpdating{
     }
 }
 
-extension AddEditLandmarkViewController : AddEditLandmarkViewControllerDelegate {
+extension LandmarksTableViewController : AddEditLandmarkViewControllerDelegate {
     func AddEditLandmarkViewControllerDidCancel(_ controller: AddEditLandmarkViewController) {
         self.dismiss(animated: true)
     }
     
     func AddEditLandmarkViewController(_ controller: AddEditLandmarkViewController, didFinishAddingItem item: Landmark) {
-        /*list.append(item)
-        let indexPath = IndexPath(row: list.count - 1, section: 0)
+        landmarks.append(item)
+        let indexPath = IndexPath(row: landmarks.count - 1, section: 0)
         tableView.insertRows(at: [indexPath], with: .automatic)
         self.dismiss(animated: true)
-        saveChecklistItems()*/
+        saveContext()
     }
     
     func AddEditLandmarkViewController(_ controller: AddEditLandmarkViewController, didFinishEditingItem item: Landmark) {
-        /*let index = list.firstIndex() { $0 === item }
+        let index = landmarks.firstIndex() { $0 === item }
         
         let indexPath = IndexPath(row: index!, section: 0)
         
         tableView.reloadRows(at: [indexPath], with: .automatic)
         self.dismiss(animated: true)
-        saveChecklistItems()*/
+        saveContext()
     }
 }
