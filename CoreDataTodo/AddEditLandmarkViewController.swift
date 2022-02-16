@@ -12,6 +12,10 @@ class AddEditLandmarkViewController: UIViewController {
     @IBOutlet weak var textFieldTitle: UITextField!
     @IBOutlet weak var textFieldDesc: UITextView!
     
+    @IBOutlet weak var imageView: UIImageView!
+    
+    
+    
     var container : NSPersistentContainer{
         return(UIApplication.shared.delegate as! AppDelegate).persistentContainer
     }
@@ -50,8 +54,6 @@ class AddEditLandmarkViewController: UIViewController {
             landmark.desc = textFieldDesc.text
             landmark.category = category
             
-            print(category)
-            print(category?.name)
             delegate?.AddEditLandmarkViewController(self, didFinishAddingItem: landmark)
         }
     }
@@ -59,10 +61,15 @@ class AddEditLandmarkViewController: UIViewController {
     @IBAction func cancel(_ sender: Any) {
         delegate?.AddEditLandmarkViewControllerDidCancel(self)
     }
+    
+    @IBAction func chooseImage(_ sender: UIButton) {
+        
+    }
 }
 
 protocol AddEditLandmarkViewControllerDelegate : AnyObject {
     func AddEditLandmarkViewControllerDidCancel(_ controller: AddEditLandmarkViewController)
     func AddEditLandmarkViewController(_ controller: AddEditLandmarkViewController, didFinishAddingItem item: Landmark)
     func AddEditLandmarkViewController(_  controller: AddEditLandmarkViewController, didFinishEditingItem item: Landmark)
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any])
 }
