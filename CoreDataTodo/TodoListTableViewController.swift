@@ -166,8 +166,8 @@ class TodoListTableViewController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "CategoryToLandmark" , let destinationViewController = segue.destination as? LandmarksTableViewController{
-            destinationViewController.text = "Landmarks"
-            return
+            let indexEditing = sender as! UITableViewCell
+            destinationViewController.category = categories[tableView.indexPath(for: indexEditing)!.row]
         }
     }
 }

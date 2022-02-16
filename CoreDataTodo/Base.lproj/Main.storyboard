@@ -51,7 +51,7 @@
             <objects>
                 <viewController id="0FR-qu-Me4" customClass="AddEditLandmarkViewController" customModule="CoreDataTodo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3ze-W0-yXd">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title…" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Aoc-YI-4xi">
@@ -91,8 +91,23 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Edit or Add" id="cxT-vA-MIK"/>
+                    <navigationItem key="navigationItem" title="Edit or Add" id="cxT-vA-MIK">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="Qfj-W1-AOG">
+                            <connections>
+                                <action selector="cancel:" destination="0FR-qu-Me4" id="acU-RD-R0Q"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="Ohj-T7-6iD">
+                            <connections>
+                                <action selector="save:" destination="0FR-qu-Me4" id="VVK-XK-iwz"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="textFieldDesc" destination="eeR-pX-E8f" id="lx2-1R-yXa"/>
+                        <outlet property="textFieldTitle" destination="Aoc-YI-4xi" id="ZTE-Nr-vez"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lYv-vC-v4f" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -123,6 +138,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="dox-4w-8wr" kind="presentation" identifier="edit" modalPresentationStyle="fullScreen" id="j5R-fX-rY8"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -135,7 +153,7 @@
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="3VZ-EG-vKy">
                             <connections>
                                 <action selector="AddBarButtonItemAction:" destination="vhG-SK-bsO" id="uul-aR-Qaw"/>
-                                <segue destination="dox-4w-8wr" kind="presentation" identifier="add" id="eyw-je-omV"/>
+                                <segue destination="dox-4w-8wr" kind="presentation" identifier="add" modalPresentationStyle="fullScreen" id="eyw-je-omV"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -168,8 +186,9 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dox-4w-8wr" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="XTP-ef-vfd"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="mDd-Yn-5g2">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -182,6 +201,9 @@
             <point key="canvasLocation" x="1900" y="-630"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="j5R-fX-rY8"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
