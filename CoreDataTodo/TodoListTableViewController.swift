@@ -49,12 +49,29 @@ class TodoListTableViewController: UITableViewController {
         }
     }
     private func createCategory(name: String, date: Date = Date()){
+       
+     
         let category = Category(context: container.viewContext)
         category.name = name
         category.creationDate = date
         category.modificationDate = date
         saveContext()
+        
+        createLandmark(title: name, description: "this is a description", date: Date(), category: category)
+        
     }
+    
+    private func createLandmark(title: String, description: String = "", date: Date = Date(), category : Category){
+        let landmark = Landmark(context: container.viewContext)
+        landmark.title = title
+        landmark.creationDate = date
+        landmark.modificationDate = date
+        landmark.desc = description
+        landmark.category = category
+      // categories[0].addToLandmark(landmark)
+        saveContext()
+    }
+    
     private func editCategory(name: String, category : Category){
         category.name = name
         category.modificationDate = Date()
@@ -167,6 +184,11 @@ class TodoListTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "CategoryToLandmark" , let destinationViewController = segue.destination as? LandmarksTableViewController{
             destinationViewController.text = "Landmarks"
+            
+            print(categories[0].landmark?.count)
+        
+            var land : Landmark = categories[0].landmark?.allObjects.first as! Landmark
+            print(land.title)
             return
         }
     }
