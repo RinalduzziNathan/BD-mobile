@@ -169,17 +169,7 @@ class TodoListTableViewController: UITableViewController {
             destinationViewController.text = "Landmarks"
             return
         }
-        if segue.identifier == "CategoryEdit",
-           let navigationController = segue.destination as? UINavigationController,
-           let destinationViewController = navigationController.topViewController as? EditCategoryTableViewController {
-            
-            destinationViewController.text = "Edit"
-            
-        }
-        
-        
     }
-    
 }
 
 extension TodoListTableViewController : UISearchResultsUpdating{

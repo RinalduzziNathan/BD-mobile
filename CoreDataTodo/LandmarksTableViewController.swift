@@ -14,7 +14,6 @@ class LandmarksTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(text)
         
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
