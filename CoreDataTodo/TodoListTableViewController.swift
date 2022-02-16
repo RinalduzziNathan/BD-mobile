@@ -48,6 +48,22 @@ class TodoListTableViewController: UITableViewController {
             fatalError(error.localizedDescription)
         }
     }
+    private func fetchLandmarksOfCategory(category : Category) -> [Landmark]{
+        let fetchRequest = Landmark.fetchRequest()
+
+      //  let sortDescriptor = NSSortDescriptor(keyPath : \Landmark.category, ascending: true)
+        let sortDescriptor = NSSortDescriptor(keyPath : \Landmark.creationDate, ascending: true)
+        
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        fetchRequest.predicate = NSPredicate(format : "%K == %@" ,argumentArray: [#keyPath(Landmark.category), category])
+    
+        do{
+            let result = try container.viewContext.fetch(fetchRequest)
+            return result
+        }catch{
+            fatalError(error.localizedDescription)
+        }
+    }
     private func createCategory(name: String, date: Date = Date()){
        
      
@@ -184,11 +200,6 @@ class TodoListTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "CategoryToLandmark" , let destinationViewController = segue.destination as? LandmarksTableViewController{
             destinationViewController.text = "Landmarks"
-            
-            print(categories[0].landmark?.count)
-        
-            var land : Landmark = categories[0].landmark?.allObjects.first as! Landmark
-            print(land.title)
             return
         }
     }
