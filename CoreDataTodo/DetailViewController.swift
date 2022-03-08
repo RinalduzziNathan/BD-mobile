@@ -26,17 +26,11 @@ class DetailViewController : UIViewController {
         if let landmark = landmark {
             title = landmark.title
             
-            if let image = landmark.image {
-                imageLandmark.image = UIImage(data: image)
+            if let imageData = landmark.image{
+                imageLandmark.image = UIImage(data: imageData)
             }
-            else {
-                if let resourcePath = Bundle.main.resourcePath {
-                    let imgName = "ImagePlaceHolder.jpeg"
-                    let path = resourcePath + "/" + imgName
-                    imageLandmark.image = UIImage(contentsOfFile: path)
-                }
-            }
-            
+        
+
             desciption.text = landmark.desc
             latitude.text = landmark.coordinate?.latitude.description
             longitude.text = landmark.coordinate?.longitude.description
