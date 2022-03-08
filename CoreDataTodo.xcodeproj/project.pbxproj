@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		08A6550527D7BAF9008D54E4 /* MKMapView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A6550427D7BAF9008D54E4 /* MKMapView+.swift */; };
+		08A6550727D7BC5B008D54E4 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A6550627D7BC5B008D54E4 /* Place.swift */; };
 		08BD4D6027B3AB8600B1F401 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BD4D5F27B3AB8600B1F401 /* AppDelegate.swift */; };
 		08BD4D6227B3AB8600B1F401 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BD4D6127B3AB8600B1F401 /* SceneDelegate.swift */; };
 		08BD4D6427B3AB8600B1F401 /* CategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BD4D6327B3AB8600B1F401 /* CategoryTableViewController.swift */; };
@@ -22,6 +24,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		08A6550427D7BAF9008D54E4 /* MKMapView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKMapView+.swift"; sourceTree = "<group>"; };
+		08A6550627D7BC5B008D54E4 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		08BD4D5C27B3AB8600B1F401 /* CoreDataTodo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreDataTodo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		08BD4D5F27B3AB8600B1F401 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		08BD4D6127B3AB8600B1F401 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +53,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		08A6550327D7BAD8008D54E4 /* extension */ = {
+			isa = PBXGroup;
+			children = (
+				08A6550427D7BAF9008D54E4 /* MKMapView+.swift */,
+			);
+			path = extension;
+			sourceTree = "<group>";
+		};
 		08BD4D5327B3AB8600B1F401 = {
 			isa = PBXGroup;
 			children = (
@@ -68,6 +80,7 @@
 		08BD4D5E27B3AB8600B1F401 /* CoreDataTodo */ = {
 			isa = PBXGroup;
 			children = (
+				08A6550327D7BAD8008D54E4 /* extension */,
 				08BD4D7627B3B28B00B1F401 /* Item+CoreDataClass.swift */,
 				08BD4D7727B3B28B00B1F401 /* Item+CoreDataProperties.swift */,
 				08BD4D5F27B3AB8600B1F401 /* AppDelegate.swift */,
@@ -81,6 +94,7 @@
 				08BD4D6827B3AB8600B1F401 /* CoreDataTodo.xcdatamodeld */,
 				08EC1DB427B41FE900F25AD1 /* AddEditLandmarkViewController.swift */,
 				08BEBF8D27BD509E00FDABA8 /* DetailViewController.swift */,
+				08A6550627D7BC5B008D54E4 /* Place.swift */,
 			);
 			path = CoreDataTodo;
 			sourceTree = "<group>";
@@ -159,11 +173,13 @@
 				08BEBF8E27BD509E00FDABA8 /* DetailViewController.swift in Sources */,
 				08BD4D7927B3B28B00B1F401 /* Item+CoreDataProperties.swift in Sources */,
 				08BD4D7B27B3F36F00B1F401 /* LandmarksTableViewController.swift in Sources */,
+				08A6550527D7BAF9008D54E4 /* MKMapView+.swift in Sources */,
 				08BD4D7827B3B28B00B1F401 /* Item+CoreDataClass.swift in Sources */,
 				08BD4D6427B3AB8600B1F401 /* CategoryTableViewController.swift in Sources */,
 				08BD4D6027B3AB8600B1F401 /* AppDelegate.swift in Sources */,
 				08BD4D6A27B3AB8600B1F401 /* CoreDataTodo.xcdatamodeld in Sources */,
 				08EC1DB527B41FE900F25AD1 /* AddEditLandmarkViewController.swift in Sources */,
+				08A6550727D7BC5B008D54E4 /* Place.swift in Sources */,
 				08BD4D6227B3AB8600B1F401 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
