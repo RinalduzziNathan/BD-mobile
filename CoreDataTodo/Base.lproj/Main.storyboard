@@ -165,7 +165,7 @@
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xKg-sD-TqF">
                                             <rect key="frame" x="20" y="0.0" width="329" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -184,14 +184,20 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Landmark" id="Wq6-k2-Qpj">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="3VZ-EG-vKy">
-                            <connections>
-                                <action selector="AddBarButtonItemAction:" destination="vhG-SK-bsO" id="uul-aR-Qaw"/>
-                                <segue destination="dox-4w-8wr" kind="presentation" identifier="add" modalPresentationStyle="fullScreen" id="eyw-je-omV"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem style="plain" systemItem="add" id="3VZ-EG-vKy">
+                                <connections>
+                                    <action selector="AddBarButtonItemAction:" destination="vhG-SK-bsO" id="uul-aR-Qaw"/>
+                                    <segue destination="dox-4w-8wr" kind="presentation" identifier="add" modalPresentationStyle="fullScreen" id="eyw-je-omV"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem style="plain" systemItem="search" id="ZgB-SE-5bZ"/>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="menuBarButtonItem" destination="ZgB-SE-5bZ" id="x3S-pe-jwF"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ydy-vM-7AA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

@@ -19,7 +19,7 @@ class DetailViewController : UIViewController {
         
         title = landmark?.title
         
-        
+        print(landmark?.modificationDate)
     }
     
 }

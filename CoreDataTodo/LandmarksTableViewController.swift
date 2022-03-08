@@ -12,9 +12,25 @@ class LandmarksTableViewController: UITableViewController {
     var category : Category?
     var landmarks : [Landmark] = []
     
+    var menuItems: [UIAction] {
+        return [
+            UIAction(title: "Date de modification", image: UIImage(systemName: "sun.max"), handler: { (_) in
+       
+            }),
+            UIAction(title: "Date de création", image: UIImage(systemName: "moon"), handler: { (_) in
+            })
+        ]
+    }
+
+    var demoMenu: UIMenu {
+        return UIMenu(title: "My menu", image: nil, identifier: nil, options: [], children: menuItems)
+    }
+
+    @IBOutlet weak var menuBarButtonItem: UIBarButtonItem!
+    
     override func viewDidLoad() {
-        print(category?.name)
         super.viewDidLoad()
+        menuBarButtonItem.menu = demoMenu
         title = category?.name
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
@@ -22,15 +38,11 @@ class LandmarksTableViewController: UITableViewController {
 
         landmarks = fetchLandmarksOfCategory(category: category!)
         
-       
-        tableView.reloadData()
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
 
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        tableView.reloadData()
     }
 
+    
     // MARK: - Table view data source
     
     var container : NSPersistentContainer{
@@ -40,7 +52,7 @@ class LandmarksTableViewController: UITableViewController {
     private func fetchLandmarksOfCategory(category : Category) -> [Landmark]{
         let fetchRequest = Landmark.fetchRequest()
 
-      //  let sortDescriptor = NSSortDescriptor(keyPath : \Landmark.category, ascending: true)
+        //Display landmarks by creationDate
         let sortDescriptor = NSSortDescriptor(keyPath : \Landmark.creationDate, ascending: true)
         
         fetchRequest.sortDescriptors = [sortDescriptor]
@@ -57,11 +69,24 @@ class LandmarksTableViewController: UITableViewController {
     private func saveContext(){
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
     }
-    private func fetchLandmark(searchQuery: String? = nil) -> [Landmark]{
+    
+    private func fetchLandmarkByName(searchQuery: String? = nil) -> [Landmark]{
         let fetchRequest = Landmark.fetchRequest()
+        var sortDescriptorDate :  NSSortDescriptor?
+        
+        switch(navigationItem.searchController?.searchBar.selectedScopeButtonIndex){
+        
+            
+        case  0: print("Modif")
+             sortDescriptorDate = NSSortDescriptor(keyPath : \Landmark.modificationDate, ascending: true)
+        case 1 :print("Crea")
+             sortDescriptorDate = NSSortDescriptor(keyPath : \Landmark.modificationDate, ascending: false)
+        default: print("never")
+            
+        }
         
         let sortDescriptor = NSSortDescriptor(keyPath : \Landmark.title, ascending: true)
-        fetchRequest.sortDescriptors = [sortDescriptor]
+        fetchRequest.sortDescriptors = [sortDescriptor, sortDescriptorDate!]
         if let searchQuery = searchQuery, !searchQuery.isEmpty {
             let predicates = NSCompoundPredicate(
                 type: .and,
@@ -77,7 +102,7 @@ class LandmarksTableViewController: UITableViewController {
             fetchRequest.predicate = predicates
         }
         
-        
+      
         do{
             let result = try container.viewContext.fetch(fetchRequest)
             return result
@@ -85,6 +110,7 @@ class LandmarksTableViewController: UITableViewController {
             fatalError(error.localizedDescription)
         }
     }
+    
     private func createLandmark(title: String, description: String = "", date: Date = Date()){
         let landmark = Landmark(context: container.viewContext)
         landmark.title = title
@@ -137,7 +163,6 @@ class LandmarksTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         let landmark = landmarks[indexPath.row]
-       // cell.accessoryType = item.isChecked ? .checkmark : .none
         cell.textLabel?.text = landmark.title
         cell.detailTextLabel?.text = DateFormatter.localizedString(from: landmark.creationDate!,
                                                                    dateStyle: .short,
@@ -164,10 +189,10 @@ class LandmarksTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let landmark  = landmarks[indexPath.row]
-       // category.isChecked.toggle()
+        _  = landmarks[indexPath.row]
+      
         saveContext()
-        guard let cell = tableView.cellForRow(at: indexPath) else {
+        guard tableView.cellForRow(at: indexPath) != nil else {
             return
         }
      
@@ -202,7 +227,7 @@ extension LandmarksTableViewController : UISearchResultsUpdating{
      
     func updateSearchResults(for seatchController : UISearchController){
         let searchQuery = seatchController.searchBar.text
-        landmarks = fetchLandmark(searchQuery: searchQuery)
+        landmarks = fetchLandmarkByName(searchQuery: searchQuery)
         tableView.reloadData()
     }
 }
