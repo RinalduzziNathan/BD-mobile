@@ -29,7 +29,6 @@ class DetailViewController : UIViewController {
             if let imageData = landmark.image{
                 imageLandmark.image = UIImage(data: imageData)
             }
-        
 
             desciption.text = landmark.desc
             latitude.text = landmark.coordinate?.latitude.description
