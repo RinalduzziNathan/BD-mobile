@@ -13,6 +13,8 @@ class AddEditLandmarkViewController: UIViewController {
     
     @IBOutlet weak var textFieldTitle: UITextField!
     @IBOutlet weak var textFieldDesc: UITextView!
+    @IBOutlet weak var textFieldLatitude: UITextField!
+    @IBOutlet weak var textFieldLongitude: UITextField!
     
     @IBOutlet weak var imageView: UIImageView!
     
@@ -36,6 +38,11 @@ class AddEditLandmarkViewController: UIViewController {
             self.title = "Edit Landmark"
             textFieldTitle.text = landmarkToEdit.title
             textFieldDesc.text = landmarkToEdit.desc
+            textFieldLatitude.text = landmarkToEdit.coordinate?.latitude.description
+            print(landmarkToEdit.coordinate?.latitude.description)
+            textFieldLongitude.text = landmarkToEdit.coordinate?.longitude.description
+            print(landmarkToEdit.coordinate?.longitude.description)
+            
             if landmarkToEdit.image != nil {
                 imageView.image = UIImage(data: landmarkToEdit.image!)
             }
@@ -49,12 +56,31 @@ class AddEditLandmarkViewController: UIViewController {
         if let landmarkToEdit = landmarkToEdit {
             landmarkToEdit.title = textFieldTitle.text
             landmarkToEdit.desc = textFieldDesc.text
-            landmarkToEdit.image = imageLandmark
+            landmarkToEdit.modificationDate = Date()
+            
+            if let latitude = Double(textFieldLatitude.text!) {
+                landmarkToEdit.coordinate?.latitude = latitude
+            }
+            if let longitude = Double(textFieldLongitude.text!) {
+                landmarkToEdit.coordinate?.longitude = longitude
+            }
+            
+            if let imageLandmark = imageLandmark {
+                landmarkToEdit.image = imageLandmark
+            }
             
             delegate?.AddEditLandmarkViewController(self, didFinishEditingItem: landmarkToEdit)
         }
         else {
             let landmark = Landmark(context: container.viewContext)
+            let coordinate = Coordinate(context: container.viewContext)
+            if let latitude = Double(textFieldLatitude.text!) {
+                coordinate.latitude = latitude
+            }
+            if let longitude = Double(textFieldLongitude.text!) {
+                coordinate.longitude = longitude
+            }
+            landmark.coordinate = coordinate
             landmark.title = textFieldTitle.text
             landmark.creationDate = Date()
             landmark.modificationDate = Date()
