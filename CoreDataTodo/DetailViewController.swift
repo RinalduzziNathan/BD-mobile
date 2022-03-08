@@ -18,8 +18,8 @@ class DetailViewController : UIViewController {
     @IBOutlet weak var desciption: UITextView!
     @IBOutlet weak var latitude: UITextField!
     @IBOutlet weak var longitude: UITextField!
-    @IBOutlet weak var dateEdit: UIDatePicker!
-    @IBOutlet weak var dateCreation: UIDatePicker!
+    @IBOutlet weak var dateEdition: UILabel!
+    @IBOutlet weak var dateCreation: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,8 +34,13 @@ class DetailViewController : UIViewController {
             desciption.text = landmark.desc
             latitude.text = landmark.coordinate?.latitude.description
             longitude.text = landmark.coordinate?.longitude.description
-            dateEdit.date = landmark.modificationDate!
-            dateCreation.date = landmark.creationDate!
-        }
+            dateEdition.text = landmark.modificationDate!.toLocalizedString()
+            dateCreation.text = landmark.creationDate!.toLocalizedString()        }
+    }
+}
+
+extension Date {
+    func toLocalizedString() -> String {
+        return DateFormatter.localizedString(from: self, dateStyle: .short, timeStyle: .short)
     }
 }

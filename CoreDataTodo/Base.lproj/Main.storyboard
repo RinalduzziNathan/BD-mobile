@@ -408,18 +408,18 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="SJv-Bs-6WQ">
                                                         <rect key="frame" x="130" y="0.0" width="278" height="100"/>
                                                         <subviews>
-                                                            <datePicker userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="55L-6P-3nN">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v5S-2Q-5vs">
                                                                 <rect key="frame" x="0.0" y="0.0" width="278" height="50"/>
-                                                                <date key="maximumDate" timeIntervalSinceReferenceDate="1167562800">
-                                                                    <!--2037-12-31 11:00:00 +0000-->
-                                                                </date>
-                                                            </datePicker>
-                                                            <datePicker userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="KTP-nt-PeV">
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RyG-Dg-aFc">
                                                                 <rect key="frame" x="0.0" y="50" width="278" height="50"/>
-                                                                <date key="maximumDate" timeIntervalSinceReferenceDate="1167562800">
-                                                                    <!--2037-12-31 11:00:00 +0000-->
-                                                                </date>
-                                                            </datePicker>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
                                                         </subviews>
                                                     </stackView>
                                                 </subviews>
@@ -472,8 +472,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="uK0-tL-jwl"/>
                     <connections>
-                        <outlet property="dateCreation" destination="KTP-nt-PeV" id="3qs-Lw-O6k"/>
-                        <outlet property="dateEdit" destination="55L-6P-3nN" id="kNT-8C-RiR"/>
+                        <outlet property="dateCreation" destination="RyG-Dg-aFc" id="mND-Ga-DaJ"/>
+                        <outlet property="dateEdition" destination="v5S-2Q-5vs" id="l7p-Jo-irZ"/>
                         <outlet property="desciption" destination="E3r-cf-2aC" id="6pZ-ac-uVi"/>
                         <outlet property="imageLandmark" destination="abN-S5-EJW" id="M82-sA-lcb"/>
                         <outlet property="latitude" destination="WzQ-Jw-j9A" id="NlF-wK-LAo"/>
