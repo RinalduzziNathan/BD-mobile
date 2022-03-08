@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		08BD4D6027B3AB8600B1F401 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BD4D5F27B3AB8600B1F401 /* AppDelegate.swift */; };
 		08BD4D6227B3AB8600B1F401 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BD4D6127B3AB8600B1F401 /* SceneDelegate.swift */; };
-		08BD4D6427B3AB8600B1F401 /* TodoListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BD4D6327B3AB8600B1F401 /* TodoListTableViewController.swift */; };
+		08BD4D6427B3AB8600B1F401 /* CategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BD4D6327B3AB8600B1F401 /* CategoryTableViewController.swift */; };
 		08BD4D6727B3AB8600B1F401 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08BD4D6527B3AB8600B1F401 /* Main.storyboard */; };
 		08BD4D6A27B3AB8600B1F401 /* CoreDataTodo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 08BD4D6827B3AB8600B1F401 /* CoreDataTodo.xcdatamodeld */; };
 		08BD4D6C27B3AB8700B1F401 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08BD4D6B27B3AB8700B1F401 /* Assets.xcassets */; };
@@ -25,7 +25,7 @@
 		08BD4D5C27B3AB8600B1F401 /* CoreDataTodo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreDataTodo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		08BD4D5F27B3AB8600B1F401 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		08BD4D6127B3AB8600B1F401 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		08BD4D6327B3AB8600B1F401 /* TodoListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListTableViewController.swift; sourceTree = "<group>"; };
+		08BD4D6327B3AB8600B1F401 /* CategoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewController.swift; sourceTree = "<group>"; };
 		08BD4D6627B3AB8600B1F401 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		08BD4D6927B3AB8600B1F401 /* CoreDataTodo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataTodo.xcdatamodel; sourceTree = "<group>"; };
 		08BD4D6B27B3AB8700B1F401 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -72,7 +72,7 @@
 				08BD4D7727B3B28B00B1F401 /* Item+CoreDataProperties.swift */,
 				08BD4D5F27B3AB8600B1F401 /* AppDelegate.swift */,
 				08BD4D6127B3AB8600B1F401 /* SceneDelegate.swift */,
-				08BD4D6327B3AB8600B1F401 /* TodoListTableViewController.swift */,
+				08BD4D6327B3AB8600B1F401 /* CategoryTableViewController.swift */,
 				08BD4D7A27B3F36F00B1F401 /* LandmarksTableViewController.swift */,
 				08BD4D6527B3AB8600B1F401 /* Main.storyboard */,
 				08BD4D6B27B3AB8700B1F401 /* Assets.xcassets */,
@@ -160,7 +160,7 @@
 				08BD4D7927B3B28B00B1F401 /* Item+CoreDataProperties.swift in Sources */,
 				08BD4D7B27B3F36F00B1F401 /* LandmarksTableViewController.swift in Sources */,
 				08BD4D7827B3B28B00B1F401 /* Item+CoreDataClass.swift in Sources */,
-				08BD4D6427B3AB8600B1F401 /* TodoListTableViewController.swift in Sources */,
+				08BD4D6427B3AB8600B1F401 /* CategoryTableViewController.swift in Sources */,
 				08BD4D6027B3AB8600B1F401 /* AppDelegate.swift in Sources */,
 				08BD4D6A27B3AB8600B1F401 /* CoreDataTodo.xcdatamodeld in Sources */,
 				08EC1DB527B41FE900F25AD1 /* AddEditLandmarkViewController.swift in Sources */,

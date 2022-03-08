@@ -155,34 +155,6 @@ class LandmarksTableViewController: UITableViewController {
         saveContext()
     }
     
-    /*@IBAction func AddBarButtonItemAction(_ sender: UIBarButtonItem) {
-    
-        let alertController = UIAlertController(title: "nouveau lieu", message: "ajouter nouveau lieu", preferredStyle: .alert)
-        alertController.addTextField { textField in
-            textField.placeholder = "Titre…"
-        }
-        
-        let cancelAction = UIAlertAction(title : "Annuler",
-                                         style: .cancel,
-                                         handler: nil)
-        
-        let saveAction = UIAlertAction(title : "Sauvegarder",
-                                   style: .default){[weak self] _ in
-        
-            guard let self = self, let textField = alertController.textFields?.first else{
-                return
-            }
-            self.createLandmark(title: textField.text!)
-            self.landmarks = self.fetchLandmark()
-            self.tableView.reloadData()
-        }
-        
-        alertController.addAction(cancelAction)
-        alertController.addAction(saveAction)
-        present(alertController,animated: true)
-    }*/
-
-    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return landmarks.count
     }

@@ -8,7 +8,7 @@
 import UIKit
 import CoreData
 
-class TodoListTableViewController: UITableViewController {
+class CategoryListTableViewController: UITableViewController {
     var items : [Item] = []
     var categories : [Category] = []
     
@@ -248,7 +248,7 @@ class TodoListTableViewController: UITableViewController {
     }
 }
 
-extension TodoListTableViewController : UISearchResultsUpdating{
+extension CategoryListTableViewController : UISearchResultsUpdating{
 
     func updateSearchResults(for seatchController : UISearchController){
         let searchQuery = seatchController.searchBar.text
