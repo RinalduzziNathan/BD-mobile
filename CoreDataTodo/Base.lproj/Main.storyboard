@@ -309,7 +309,7 @@
                                 <rect key="frame" x="0.0" y="88" width="428" height="755"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ahy-PU-KqH">
-                                        <rect key="frame" x="0.0" y="0.0" width="428" height="1000"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="428" height="656.66666666666663"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="abN-S5-EJW">
                                                 <rect key="frame" x="0.0" y="0.0" width="428" height="228.33333333333334"/>
@@ -406,13 +406,13 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="SJv-Bs-6WQ">
                                                         <rect key="frame" x="130" y="0.0" width="278" height="100"/>
                                                         <subviews>
-                                                            <datePicker userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="55L-6P-3nN">
+                                                            <datePicker userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="55L-6P-3nN">
                                                                 <rect key="frame" x="0.0" y="0.0" width="278" height="50"/>
                                                                 <date key="maximumDate" timeIntervalSinceReferenceDate="1167562800">
                                                                     <!--2037-12-31 11:00:00 +0000-->
                                                                 </date>
                                                             </datePicker>
-                                                            <datePicker userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="KTP-nt-PeV">
+                                                            <datePicker userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="KTP-nt-PeV">
                                                                 <rect key="frame" x="0.0" y="50" width="278" height="50"/>
                                                                 <date key="maximumDate" timeIntervalSinceReferenceDate="1167562800">
                                                                     <!--2037-12-31 11:00:00 +0000-->
@@ -430,7 +430,6 @@
                                             <constraint firstItem="vyE-ja-V1S" firstAttribute="leading" secondItem="ahy-PU-KqH" secondAttribute="leading" constant="10" id="M8P-38-tZN"/>
                                             <constraint firstAttribute="trailing" secondItem="Ehj-vy-A5I" secondAttribute="trailing" constant="10" id="MJh-Zv-JRq"/>
                                             <constraint firstItem="9Kr-nF-i4t" firstAttribute="leading" secondItem="ahy-PU-KqH" secondAttribute="leading" constant="10" id="Ogl-KK-pmh"/>
-                                            <constraint firstAttribute="height" constant="1000" id="Q4d-e9-Xad"/>
                                             <constraint firstItem="vyE-ja-V1S" firstAttribute="top" secondItem="9Kr-nF-i4t" secondAttribute="bottom" constant="20" id="T44-K9-g53"/>
                                             <constraint firstItem="abN-S5-EJW" firstAttribute="leading" secondItem="ahy-PU-KqH" secondAttribute="leading" id="UO9-co-qUw"/>
                                             <constraint firstItem="E3r-cf-2aC" firstAttribute="top" secondItem="Ehj-vy-A5I" secondAttribute="bottom" constant="10" id="WhF-2d-Rgc"/>
@@ -438,6 +437,7 @@
                                             <constraint firstAttribute="trailing" secondItem="9Kr-nF-i4t" secondAttribute="trailing" constant="10" id="cJO-t7-lu8"/>
                                             <constraint firstItem="E3r-cf-2aC" firstAttribute="leading" secondItem="ahy-PU-KqH" secondAttribute="leading" constant="10" id="j6q-L0-YPl"/>
                                             <constraint firstItem="Ehj-vy-A5I" firstAttribute="top" secondItem="abN-S5-EJW" secondAttribute="bottom" constant="20" id="lrO-ox-dq4"/>
+                                            <constraint firstAttribute="bottom" secondItem="vyE-ja-V1S" secondAttribute="bottom" constant="10" id="nfY-LA-74P"/>
                                             <constraint firstAttribute="trailing" secondItem="vyE-ja-V1S" secondAttribute="trailing" constant="10" id="p1s-wS-D2q"/>
                                             <constraint firstItem="9Kr-nF-i4t" firstAttribute="top" secondItem="E3r-cf-2aC" secondAttribute="bottom" constant="20" id="rtp-XI-3vK"/>
                                             <constraint firstAttribute="trailing" secondItem="abN-S5-EJW" secondAttribute="trailing" id="uxw-La-ebf"/>
