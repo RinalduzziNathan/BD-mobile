@@ -12,12 +12,17 @@ class LandmarksTableViewController: UITableViewController {
     var category : Category?
     var landmarks : [Landmark] = []
     
+    var modificationDate = false
+    
     var menuItems: [UIAction] {
         return [
-            UIAction(title: "Date de modification", image: UIImage(systemName: "sun.max"), handler: { (_) in
-       
+            UIAction(title: "Date de modification", handler: { (_) in
+                self.modificationDate = true
+                self.updateLandmarksSort()
             }),
-            UIAction(title: "Date de création", image: UIImage(systemName: "moon"), handler: { (_) in
+            UIAction(title: "Date de création", handler: { (_) in
+                self.modificationDate = false
+                self.updateLandmarksSort()
             })
         ]
     }
@@ -49,13 +54,47 @@ class LandmarksTableViewController: UITableViewController {
         return(UIApplication.shared.delegate as! AppDelegate).persistentContainer
     }
     
+    private func updateLandmarksSort(){
+        let fetchRequest = Landmark.fetchRequest()
+
+        var sortDescriptorDate :  NSSortDescriptor?
+        
+        switch(modificationDate){
+        
+        case  true: print("Modif")
+             sortDescriptorDate = NSSortDescriptor(keyPath : \Landmark.modificationDate, ascending: false)
+        case false :print("Crea")
+             sortDescriptorDate = NSSortDescriptor(keyPath : \Landmark.creationDate, ascending: true)
+
+        }
+    
+        fetchRequest.sortDescriptors = [sortDescriptorDate!]
+        fetchRequest.predicate = NSPredicate(format : "%K == %@" ,argumentArray: [#keyPath(Landmark.category), category])
+    
+        do{
+            let result = try container.viewContext.fetch(fetchRequest)
+            landmarks = result
+            tableView.reloadData()
+        }catch{
+            fatalError(error.localizedDescription)
+        }
+    }
+    
     private func fetchLandmarksOfCategory(category : Category) -> [Landmark]{
         let fetchRequest = Landmark.fetchRequest()
 
-        //Display landmarks by creationDate
-        let sortDescriptor = NSSortDescriptor(keyPath : \Landmark.creationDate, ascending: true)
+        var sortDescriptorDate :  NSSortDescriptor?
         
-        fetchRequest.sortDescriptors = [sortDescriptor]
+        switch(modificationDate){
+        
+        case  true: print("Modif")
+             sortDescriptorDate = NSSortDescriptor(keyPath : \Landmark.modificationDate, ascending: false)
+        case false :print("Crea")
+             sortDescriptorDate = NSSortDescriptor(keyPath : \Landmark.creationDate, ascending: true)
+
+        }
+    
+        fetchRequest.sortDescriptors = [sortDescriptorDate!]
         fetchRequest.predicate = NSPredicate(format : "%K == %@" ,argumentArray: [#keyPath(Landmark.category), category])
     
         do{
@@ -72,21 +111,10 @@ class LandmarksTableViewController: UITableViewController {
     
     private func fetchLandmarkByName(searchQuery: String? = nil) -> [Landmark]{
         let fetchRequest = Landmark.fetchRequest()
-        var sortDescriptorDate :  NSSortDescriptor?
-        
-        switch(navigationItem.searchController?.searchBar.selectedScopeButtonIndex){
-        
-            
-        case  0: print("Modif")
-             sortDescriptorDate = NSSortDescriptor(keyPath : \Landmark.modificationDate, ascending: true)
-        case 1 :print("Crea")
-             sortDescriptorDate = NSSortDescriptor(keyPath : \Landmark.modificationDate, ascending: false)
-        default: print("never")
-            
-        }
+      
         
         let sortDescriptor = NSSortDescriptor(keyPath : \Landmark.title, ascending: true)
-        fetchRequest.sortDescriptors = [sortDescriptor, sortDescriptorDate!]
+        fetchRequest.sortDescriptors = [sortDescriptor]
         if let searchQuery = searchQuery, !searchQuery.isEmpty {
             let predicates = NSCompoundPredicate(
                 type: .and,
@@ -247,9 +275,7 @@ extension LandmarksTableViewController : AddEditLandmarkViewControllerDelegate {
     
     func AddEditLandmarkViewController(_ controller: AddEditLandmarkViewController, didFinishEditingItem item: Landmark) {
         let index = landmarks.firstIndex() { $0 === item }
-        
         let indexPath = IndexPath(row: index!, section: 0)
-        
         tableView.reloadRows(at: [indexPath], with: .automatic)
         self.dismiss(animated: true)
         saveContext()
