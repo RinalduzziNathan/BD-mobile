@@ -111,10 +111,11 @@ protocol AddEditLandmarkViewControllerDelegate : AnyObject {
 extension AddEditLandmarkViewController : PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         //Verif qu'on a bien 1 élément, et qu'on peut le charger en image
+        picker.dismiss(animated: true)
+        
         guard let selectedResult = results.first, selectedResult.itemProvider.canLoadObject(ofClass: UIImage.self) else {
             return
         }
-        picker.dismiss(animated: true)
         //Charge l'image et gestion erreur
         selectedResult.itemProvider.loadObject(ofClass: UIImage.self) { [weak self] image, error in
             guard let self = self else {
