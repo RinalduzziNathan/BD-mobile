@@ -39,9 +39,7 @@ class AddEditLandmarkViewController: UIViewController {
             textFieldTitle.text = landmarkToEdit.title
             textFieldDesc.text = landmarkToEdit.desc
             textFieldLatitude.text = landmarkToEdit.coordinate?.latitude.description
-            print(landmarkToEdit.coordinate?.latitude.description)
             textFieldLongitude.text = landmarkToEdit.coordinate?.longitude.description
-            print(landmarkToEdit.coordinate?.longitude.description)
             
             if landmarkToEdit.image != nil {
                 imageView.image = UIImage(data: landmarkToEdit.image!)
