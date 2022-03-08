@@ -16,26 +16,26 @@ class LandmarksTableViewController: UITableViewController {
     
     var menuItems: [UIAction] {
         return [
-            UIAction(title: "Date de modification", handler: { (_) in
+            UIAction(title: "Date of modification", handler: { (_) in
                 self.modificationDate = true
                 self.updateLandmarksSort()
             }),
-            UIAction(title: "Date de création", handler: { (_) in
+            UIAction(title: "Date of creation", handler: { (_) in
                 self.modificationDate = false
                 self.updateLandmarksSort()
             })
         ]
     }
 
-    var demoMenu: UIMenu {
-        return UIMenu(title: "My menu", image: nil, identifier: nil, options: [], children: menuItems)
+    var sortSelectionMenu: UIMenu {
+        return UIMenu(title: "Sort with", image: nil, identifier: nil, options: [], children: menuItems)
     }
 
     @IBOutlet weak var menuBarButtonItem: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        menuBarButtonItem.menu = demoMenu
+        menuBarButtonItem.menu = sortSelectionMenu
         title = category?.name
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self

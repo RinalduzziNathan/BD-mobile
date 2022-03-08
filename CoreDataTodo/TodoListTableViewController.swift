@@ -11,10 +11,32 @@ import CoreData
 class TodoListTableViewController: UITableViewController {
     var items : [Item] = []
     var categories : [Category] = []
+    
+    @IBOutlet weak var menuBarButtonItem: UIBarButtonItem!
+    var modificationDate = false
+    
+    
+    var menuItems: [UIAction] {
+        return [
+            UIAction(title: "Date of modification", handler: { (_) in
+                self.modificationDate = true
+                self.updateCategorySort()
+            }),
+            UIAction(title: "Date of creation", handler: { (_) in
+                self.modificationDate = false
+                self.updateCategorySort()
+            })
+        ]
+    }
+
+    var sortSelectionMenu: UIMenu {
+        return UIMenu(title: "Sort with", image: nil, identifier: nil, options: [], children: menuItems)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-
+        menuBarButtonItem.menu = sortSelectionMenu
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
         navigationItem.searchController = searchController
@@ -48,6 +70,34 @@ class TodoListTableViewController: UITableViewController {
             fatalError(error.localizedDescription)
         }
     }
+    
+    private func updateCategorySort(){
+        let fetchRequest = Category.fetchRequest()
+
+        var sortDescriptorDate :  NSSortDescriptor?
+        
+        switch(modificationDate){
+        
+        case  true: print("Modif")
+             sortDescriptorDate = NSSortDescriptor(keyPath : \Category.modificationDate, ascending: false)
+        case false :print("Crea")
+             sortDescriptorDate = NSSortDescriptor(keyPath : \Category.creationDate, ascending: true)
+
+        }
+    
+        fetchRequest.sortDescriptors = [sortDescriptorDate!]
+    
+        do{
+            let result = try container.viewContext.fetch(fetchRequest)
+            categories = result
+            tableView.reloadData()
+        }catch{
+            fatalError(error.localizedDescription)
+        }
+    }
+    
+    
+    
     private func fetchLandmarksOfCategory(category : Category) -> [Landmark]{
         let fetchRequest = Landmark.fetchRequest()
 

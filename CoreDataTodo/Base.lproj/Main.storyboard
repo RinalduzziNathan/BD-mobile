@@ -34,13 +34,23 @@
                             <outlet property="delegate" destination="cGd-MR-hWk" id="AtJ-1m-18g"/>
                         </connections>
                     </tableView>
+                    <toolbarItems>
+                        <barButtonItem style="plain" systemItem="search" id="vJm-20-xXU"/>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" title="Category" largeTitleDisplayMode="always" id="St3-mh-h9O">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="UY5-ZM-fov">
-                            <connections>
-                                <action selector="AddBarButtonItemAction:" destination="cGd-MR-hWk" id="0Mu-Bx-Kpw"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem style="plain" systemItem="add" id="UY5-ZM-fov">
+                                <connections>
+                                    <action selector="AddBarButtonItemAction:" destination="cGd-MR-hWk" id="0Mu-Bx-Kpw"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem style="plain" systemItem="search" id="5AC-L1-Q0l"/>
+                        </rightBarButtonItems>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="menuBarButtonItem" destination="5AC-L1-Q0l" id="Ing-ns-XZn"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zc3-93-mb7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
