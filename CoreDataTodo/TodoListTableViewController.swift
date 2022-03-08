@@ -143,16 +143,16 @@ class TodoListTableViewController: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-        let alertController = UIAlertController(title: "Editer catégorie", message: "Editer la catégorie", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Edit category", message: "", preferredStyle: .alert)
         alertController.addTextField { textField in
-            textField.placeholder = "Nouveau nom…"
+            textField.placeholder = "New name…"
         }
 
-        let cancelAction = UIAlertAction(title : "Annuler",
+        let cancelAction = UIAlertAction(title : "Cancel",
                                          style: .cancel,
                                          handler: nil)
 
-        let saveAction = UIAlertAction(title : "Sauvegarder",
+        let saveAction = UIAlertAction(title : "Save",
                                        style: .default){[weak self] _ in
 
             guard let self = self, let textField = alertController.textFields?.first else{
@@ -171,16 +171,16 @@ class TodoListTableViewController: UITableViewController {
 
     @IBAction func AddBarButtonItemAction(_ sender: UIBarButtonItem) {
 
-        let alertController = UIAlertController(title: "nouvelle catégorie", message: "ajouter nouvelle catégorie", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "New category", message: "Add a new category", preferredStyle: .alert)
         alertController.addTextField { textField in
-            textField.placeholder = "Nom…"
+            textField.placeholder = "Name…"
         }
 
-        let cancelAction = UIAlertAction(title : "Annuler",
+        let cancelAction = UIAlertAction(title : "Cancel",
                                          style: .cancel,
                                          handler: nil)
 
-        let saveAction = UIAlertAction(title : "Sauvegarder",
+        let saveAction = UIAlertAction(title : "Save",
                                        style: .default){[weak self] _ in
 
             guard let self = self, let textField = alertController.textFields?.first else{
@@ -214,7 +214,7 @@ class TodoListTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let category = categories[indexPath.row]
-        let deleteAction = UIContextualAction(style: .destructive, title: "Supprimer"){ [weak self] _, _,completion in
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete"){ [weak self] _, _,completion in
             guard let self = self else {
                 return
             }
